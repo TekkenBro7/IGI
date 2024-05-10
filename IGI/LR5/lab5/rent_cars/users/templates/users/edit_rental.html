@@ -1,0 +1,28 @@
+{% extends 'users/fixed.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} Изменение машины {% endblock %}
+</head>
+
+<body>
+    {% block content %}
+
+    <div class="login-form">
+        <h1>Редактирование заказа</h1>
+            <form method="post">
+                {% csrf_token %}
+                
+                {{ form.as_p }}
+
+                <button class="form-control" type="submit">Сохранить</button>
+            </form>
+        </div>
+
+    {% endblock %}
+</body>
+</html>

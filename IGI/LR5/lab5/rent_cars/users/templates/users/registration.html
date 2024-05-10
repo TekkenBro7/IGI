@@ -1,0 +1,47 @@
+{% extends 'users/fixed.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} Регистрация {% endblock %}
+</head>
+<body>
+    {% block content %}
+        <h1>Регистрация</h1>
+        <div class="login-form">
+            <form  method="post">
+                {% csrf_token %}
+            
+                {% if messages %}
+                <table class="messages-table">
+                    <thead>
+                        {% for message in messages %}
+                        <tr>
+                            <th> {{ message }}</th>
+                        </tr>
+                        {% endfor %}       
+                    </thead>
+                </table>
+                {% endif %}
+                
+                {{ form.as_p }}
+                            
+                {% if msg %}
+                <label for="address">Адрес</label>
+                <input class="form-control" type="text" id="address" name="address" placeholder="Адрес">
+                <br>
+                <label for="tel">Номер телефона</label>
+                <input class="form-control" type="tel" id="tel" name="tel" placeholder="Номер телефона">
+                <br>
+                {% endif %}
+                
+                <button class="form-control" type="submit">Добавить пользователя</button>
+            </form>
+            <br><br><br><br><br><br><br><br><br><br><br><br>
+        </div>
+    {% endblock %}
+</body>
+</html>

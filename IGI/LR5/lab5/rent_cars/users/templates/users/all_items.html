@@ -1,0 +1,82 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} Аутентификациxя {% endblock %}
+</head>
+
+<body>
+{% block content %}
+<div class="section">
+    <h2>Штрафы</h2>
+    <ul>
+        {% for penalty in penalties %}
+            <li>{{ penalty.name }} - {{ penalty.percentage }}%</li>
+            <form method="post" action="{% url 'penalty_delete' penalty.id %}">
+                {% csrf_token %}
+                {% if user.is_authenticated and user.is_superuser %}
+                <button type="submit">Удалить</button>
+                {% endif %}
+            </form>
+            {% if user.is_authenticated and user.is_superuser %}
+            <a href="{% url 'penalty_edit' penalty.id %}">Изменить</a>
+            {% endif %}
+        {% endfor %}
+        <br>
+        {% if user.is_authenticated and user.is_superuser %}
+        <a href="{% url 'penalty_add' %}">Добавить штраф</a>
+        {% endif %}
+    </ul>
+    <br>
+</div>
+<div class="section">
+    <h2>Промокоды</h2>
+    <ul>
+        {% for promo_code in promo_codes %}
+            <li>{{ promo_code.code }} - {{ promo_code.discount_percentage }}%</li>
+            <form method="post" action="{% url 'promocode_delete' promo_code.id %}">
+                {% csrf_token %}
+                {% if user.is_authenticated and user.is_superuser %}
+                <button type="submit">Удалить</button>
+                {% endif %}
+            </form>
+            {% if user.is_authenticated and user.is_superuser %}
+            <a href="{% url 'promocode_edit' promo_code.id %}">Изменить</a>
+            {% endif %}
+        {% endfor %}
+        <br>
+        {% if user.is_authenticated and user.is_superuser %}
+        <a href="{% url 'promocode_add' %}">Добавить промогод</a>
+        {% endif %}
+    </ul>
+    <br>
+</div>
+<div class="section">
+    <h2>Скидки</h2>
+    <ul>
+        {% for discount in discounts %}
+            <li>{{ discount.name }} - {{ discount.percentage }}%</li>
+            <form method="post" action="{% url 'discount_delete' discount.id %}">
+                {% csrf_token %}
+                {% if user.is_authenticated and user.is_superuser %}
+                <button type="submit">Удалить</button>
+                {% endif %}
+            </form>
+            {% if user.is_authenticated and user.is_superuser %}
+            <a href="{% url 'discount_edit' discount.id %}">Изменить</a>
+            {% endif %}
+        {% endfor %}
+        <br>
+        {% if user.is_authenticated and user.is_superuser %}
+        <a href="{% url 'discount_add' %}">Добавить скидку</a>
+        {% endif %} 
+    </ul>
+</div>  
+{% endblock %}
+
+</body>
+</html>

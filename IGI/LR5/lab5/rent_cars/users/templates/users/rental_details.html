@@ -1,0 +1,55 @@
+{% extends 'users/fixed.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} Вывод {% endblock %}
+</head>
+
+<body>
+    {% block content %}
+        <div class="car-infoo">
+            <h1>Детали заказа</h1>
+            <p><strong>Машина:</strong> {{ rental.car }}</p>
+            <p><strong>Клиент:</strong> {{ rental.client }}</p>
+            <p><strong>Дата аренды:</strong> {{ rental.rental_date }}</p>
+            <p><strong>Количество дней:</strong> {{ rental.rental_days }}</p>
+            <p><strong>Ожидаемая дата возврата:</strong> {{ rental.expected_return_date }}</p>
+            <p><strong>Промокод:</strong> {{ rental.promocode }}</p>
+            <p><strong>Скидка:</strong> {{ rental.discount }}</p>
+            <p><strong>Общая сумма:</strong> {{ rental.total_amount }}</p>
+            <p><strong>Штрафы:</strong></p>
+            <ul>
+                {% for penalty in rental.penalty.all %}
+                    <li>{{ penalty }}</li>
+                    {% empty %}
+                    <li>Нет штрафов</li>
+                {% endfor %}  
+                <p><strong>Сдал машину: </strong>
+                    {% if rental.is_pass %}
+                        Сдал
+                    {% else %}
+                        Нет
+                    {% endif %}
+                </p>
+            </ul>           
+            <br>        
+        </div>
+        <br>
+        {% if user.is_authenticated and user.is_superuser or user.is_employee %}
+                <form class='login-form' action="{% url 'delete_rental' rental.id %}" method="post">
+                    {% csrf_token %}
+                    <button class="form-control" type="submit">Удалить</button>
+                </form>
+                <form class='login-form' action="{% url 'edit_rental' rental.id %}" method="get">
+                    {% csrf_token %}
+                    <button class="form-control" type="submit">Изменить</button>
+                </form>
+                <br><br><br><br><br><br><br><br>
+            {% endif %}
+    {% endblock %}
+</body>
+</html>

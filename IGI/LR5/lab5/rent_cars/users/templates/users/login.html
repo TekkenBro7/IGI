@@ -1,0 +1,38 @@
+{% extends 'users/fixed.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} Аутентификация {% endblock %}
+</head>
+
+<body>
+{% block content %}
+    <h1>Вход на сайт</h1>
+    <div class="login-form">
+        <form  method="post">
+            {% csrf_token %}
+            {% if messages %}
+                <table class="messages-table">
+                    <thead>
+                            {% for message in messages %}
+                            <tr>
+                                <th> {{ message }}</th>
+                            </tr>
+                            {% endfor %}       
+                    </thead>
+                </table>
+            {% endif %}
+            {{ form.as_p }}
+            {% if request.GET.next %}
+                <input type="hidden" name="next" value="{{ request.GET.next }}">
+            {% endif %}
+            <button class="form-control" type="submit">Зарегистрироваться</button>
+        </form>
+    </div>
+    {% endblock %}
+</body>
+</html>

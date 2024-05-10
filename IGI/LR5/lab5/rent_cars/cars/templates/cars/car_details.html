@@ -1,0 +1,39 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} Вывод {% endblock %}
+</head>
+
+<body>
+    {% block content %}
+        <div class="car-infoo">
+            <h2>{{ car.license_plate }}</h2>
+            <img src="{{ car.image.url }}" width="500" height="170">
+            <p>Model: {{ car.model }}</p>
+            <p>Body Type: {{ car.body_type }}</p>
+            <p>Year: {{ car.year }}</p>
+            <p>Car Cost: {{ car.car_cost }}</p>
+            <p>Rental Cost per Day: {{ car.rental_cost_per_day }}</p> 
+            {% if user.is_authenticated and user.is_superuser or user.is_employee %}
+                <p>Последняя дата изменения: {{ car.updated_at }}</p>
+                <p>Дата добавления: {{ car.created_at }}</p>
+            {% endif %}        
+            <br>        
+        </div>
+        <br>
+        {% if user.is_authenticated and user.is_superuser %}
+            <div class="login-form">
+                <div class="car-infoo">    
+                    <a href="{% url 'car_delete' car.id %}" class="form-control">Удалить</a>
+                    <a href="{% url 'car_update' car.id %}" class="form-control">Изменить</a>
+                </div>
+            </div>
+        {% endif %}
+    {% endblock %}
+</body>
+</html>

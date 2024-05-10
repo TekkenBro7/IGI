@@ -1,0 +1,26 @@
+{% extends 'users/fixed.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} Аутентификация {% endblock %}
+</head>
+
+<body>
+{% block content %}
+    
+<h1>Добавление промокода</h1>
+<form class="login-form" method="post">
+    {% csrf_token %}
+    
+    {{ form.as_p }}
+
+    <button class="login-form" type="submit">Добавить промокод</button>
+</form>
+
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,86 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} Вывод {% endblock %}
+</head>
+
+<body>
+    {% block content %} 
+    <div class="container">
+        <div class="search-form">    
+            <form method="GET" action="{% url 'car_filter' %}" class="search-form">
+                <div class="form-group">
+                    <label for="model_type">Название авто:</label>
+                    <input type="text" id="model_type" name="model_type" value="{{ model_type }}" placeholder="Поиск по модели">
+                </div>
+                
+                <div class="form-group">
+                    <label for="sort_by">Сортировать по:</label>
+                    <select name="sort_by" id="sort_by">
+                        <option value="">Выберите критерий</option>
+                        <option value="name">Название</option>
+                        <option value="year">Год</option>
+                        <option value="cost">Стоимость</option>
+                    </select>
+                </div>
+            
+                <div class="form-group">
+                    <label for="body_type">Тип кузова:</label>
+                    <select name="body_type" id="body_type">
+                        <option value="">Выберите тип кузова</option>
+                        {% for body_type in body_types %}
+                            <option value="{{ body_type.id }}">{{ body_type.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                <label for="year">Год выпуска</label>
+                    <input type="number" id="year" name="year" value="{{ year }}" placeholder="Год автомобиля">
+                </div>
+            
+                <div class="form-group">
+                    <label for="greater_year">Год больше указанного</label>
+                        <input type="number" id="greater_year" name="greater_year" value="{{ greater_year }}" placeholder="Год автомобиля">
+                    </div>
+
+                <div class="form-group">
+                    <button type="submit">Применить</button>
+                </div>
+            </form>
+        </div>
+
+
+
+        <div class="car-grid">
+            {% if cars %}
+            {% for car in cars %}
+                <a href="{% url 'car_detail' car.id %}" class="no-highlight-link">   
+                    <div class="car-info">
+                        <h2>{{ car.license_plate }}</h2>
+                        <img src="{{ car.image.url }}" width="500" height="125" alt="{% static 'images/no.jpg' %}">
+                        <p>Model: {{ car.model }}</p>
+                        <p>Body Type: {{ car.body_type }}</p>
+                        <p>Year: {{ car.year }}</p>
+                        <p>Car Cost: {{ car.car_cost }}</p>
+                        <p>Rental Cost per Day: {{ car.rental_cost_per_day }}</p>              
+                    </div>
+                </a>
+            {% endfor %}
+        {% else %}
+            <p>Ничего не найдено</p>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        {% endif %}
+        </div>
+    </div>
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+    {% endblock %}
+</body>
+</html>

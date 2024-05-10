@@ -1,0 +1,40 @@
+{% extends 'users/fixed.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} Вывод {% endblock %}
+</head>
+
+<body>
+    {% block content %} 
+    <h2>Модели машин</h2>
+    <div class="car-models-container">
+      {% if car_models %}
+        <ul>
+          {% for car_model in car_models %}
+            <li class="car-model">
+              <div>
+                <span>{{ car_model.brand }} - {{ car_model.name }}</span>
+                <form method="post" action="{% url 'delete_car_model' car_model.id %}">
+                  {% csrf_token %}
+                  <button type="submit">Удалить</button>
+                </form>
+              </div>
+            </li>
+          {% empty %}
+            <li>No car models available.</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>No car models available.</p>
+      {% endif %}
+    </div>
+  
+    
+    {% endblock %}
+</body>
+</html>

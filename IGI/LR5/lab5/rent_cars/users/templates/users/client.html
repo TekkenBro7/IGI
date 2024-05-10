@@ -1,0 +1,80 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} Аутентификация {% endblock %}
+</head>
+
+<body>
+    {% block content %}   
+    
+    <h1>Список клиентов</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Имя пользователя</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Почта</th>
+                <th>Телефон</th>
+                <th>Регулярный клиент</th>
+                <th>Лет</th>
+                <th>Впервые</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in clients %}
+            <tr>
+                <td>{{ client.user.username }}</td>
+                <td>{{ client.user.first_name }}</td>
+                <td>{{ client.user.last_name }}</td>
+                <td>{{ client.user.email }}</td>
+                <td>{{ client.phone }}</td>
+                <td>{{ client.is_regular_customer }}</td>
+                <td>{{ client.age }}</td>
+                <td>{% if client.is_firts_time %}Да{% else %}Нет{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% if user.is_authenticated and user.is_superuser %}
+    {% if employees %}
+    <br>
+    <h1>Список сотрудников</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Имя пользователя</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Почта</th>
+                <th>Лет</th>
+                <!-- Другие поля сотрудников -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in employees %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.first_name }}</td>
+                <td>{{ user.last_name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.age }}</td>
+                <!-- Другие поля сотрудника -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    {% endif %}
+    {% endif %}
+
+
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,59 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} Аутентификация {% endblock %}
+</head>
+
+
+<body>
+    {% block content %}   
+    <div id="chart-container">{{ plot_div|safe }}</div>
+    
+    <h1>Список клиентов</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Имя пользователя</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Почта</th>
+                <th>Телефон</th>
+                <th>Регулярный клиент</th>
+                <th>Впервые</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in clients %}
+            <tr>
+                <td>{{ client.user.username }}</td>
+                <td>{{ client.user.first_name }}</td>
+                <td>{{ client.user.last_name }}</td>
+                <td>{{ client.user.email }}</td>
+                <td>{{ client.phone }}</td>
+                <td>{{ client.is_regular_customer }}</td>
+                <td>{% if client.is_firts_time %}Да{% else %}Нет{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br><br><br><br>
+
+    <h1>Статистика продаж</h2>
+    <div class="car-info">
+        <p>Всего заработано: {{ total_sales }}</p>
+        <p>Средняя аренда: {{ average_sales }}</p>
+        <p>Мода: {{ sales_mode }}</p>
+        <p>Медиана: {{ sales_median }}</p>
+        <p>Самая арендуемая машина: {{ model_name }} - {{ rental_count }} продаж </p>
+        <p>Самая прибыльная машина: {{ most_profitable_type }} </p>
+    </div>
+    {% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+{% extends 'users/fixed.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} Шутка {% endblock %}
+</head>
+
+<body>
+    {% block content %}
+    <div class="car-infoo">
+        <div class="foorm-control">
+        <h1>Случайная шутка:</h1>
+        <p>{{ joke.setup }}</p>
+        <p>{{ joke.punchline }}</p>
+
+        <p>{{ full_text }}</p>
+    </div>
+    </div>
+    {% endblock %}
+</body>
+</html>

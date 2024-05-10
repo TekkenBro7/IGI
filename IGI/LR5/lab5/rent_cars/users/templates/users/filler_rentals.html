@@ -1,0 +1,113 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} Аутентификация {% endblock %}
+</head>
+
+<body>
+    {% block content %}
+        <div class="container">
+            <div class="search-form">        
+                <form method="GET" action="{% url 'filter_rentals' %}" class="search-form">
+                    <div class="form-group">
+                        <label for="model_type">Car:</label>
+                        <input type="text" name="search_name" placeholder="Search by name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="car_type">Car type:</label>
+                        <select name="car_type" id="car_type">
+                            <option value="">Select car type</option>
+                            {% for car_type in car_types %}
+                                <option value="{{ car_type.id }}">{{ car_type.model }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="year">Rental days</label>
+                            <input type="number" id="year" name="search_days" placeholder=">= selected day">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="discount">Discount:</label>
+                        <select name="discount" id="discount">
+                            <option value="">All</option>
+                            <option value="True">With</option>
+                            <option value="False">Without</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sort_by">Sort by:</label>
+                        <select name="sort_by" id="sort_by">
+                            <option value="">Select a criterion</option>
+                            <option value="name">Car model</option>
+                            <option value="days">Rental days</option>
+                            <option value="amount">Total amount</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit">Filter</button>
+                    </div>
+                </form>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Car</th>
+                        <th>Renter</th>
+                        <th>Rental Date</th>
+                        <th>Rental Days</th>
+                        <th>Expected Return Date</th>
+                        <th>Promocode</th>
+                        <th>Discount</th>
+                        <th>Total Amount</th>
+                        <th>Penalties</th>
+                        <th>More<th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% if filtered_rentals %}
+                        {% for rental in filtered_rentals %}
+                        <tr {% if rental.is_pass %}style="background-color: green;"{% endif %} >
+                            <td>{{ rental.car }}</td>
+                            <td>{{ rental.client }}</td>
+                            <td>{{ rental.rental_date }}</td>
+                            <td>{{ rental.rental_days }}</td>
+                            <td>{{ rental.expected_return_date }}</td>
+                            <td>{{ rental.promocode }}</td>
+                            <td>{{ rental.discount }}</td>
+                            <td>{{ rental.total_amount }}</td>
+                            <td>
+                                <ul>
+                                    {% for penalty in rental.penalty.all %}
+                                    <li>{{ penalty }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                            <td><a href="{% url 'rental_details' rental.id %}">Подробнее</a></td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td colspan="6">Нет совпадений.</td>
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table>
+
+
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            
+        </div>
+    {% endblock %}
+</body>
+</html>
