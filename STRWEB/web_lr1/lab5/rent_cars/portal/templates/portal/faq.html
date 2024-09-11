@@ -1,0 +1,14 @@
+{% extends 'users/base.html' %} 
+
+{% block title %}Часто задаваемые вопросы{% endblock %}
+
+{% block content %}
+    <h1>Часто задаваемые вопросы (FAQ)</h1>
+        {% for faq in faqs %}
+        <details>
+            <summary>{{ faq.question }}</summary>
+            <p>{{ faq.answer }}</p>
+            <p><em>Добавлено: {{ faq.date_added }}</em></p>
+        </details>
+    {% endfor %} 
+{% endblock %}

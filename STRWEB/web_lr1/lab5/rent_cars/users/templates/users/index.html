@@ -1,0 +1,144 @@
+{% extends 'users/base.html' %} {% load static %} {% block title %} Главная {% endblock %} {% block content %}
+
+<h1>Добро пожаловать на наш сайт!</h1>
+<p>Здесь вы можете найти информацию о нашем сервисе проката автомобилей.</p>
+
+<p>
+    <em>Аренда автомобилей</em> <i>like</i> <b>седаны</b> <i>and</i> <b>внедорожники</b>. Аренда внедорожника в нашем агентстве стоит <s>$100 в день</s> $80 за день
+    <small>(плюс налоги)</small>. <strong>Внимание:</strong> Арендуя
+    <u>слишком много</u> автомобилей одновременно, вы можете столкнуться с трудностями. Пункт x<sub>5</sub> — это 5<sup>й</sup> пункт в нашем списке.
+</p>
+
+<div class="banner">
+    <img src="{% static 'images/banner1.jpg' %}" alt="Баннер 1" style="width: 100%; max-height: 300px" />
+    <img src="{% static 'images/banner2.jpg' %}" alt="Баннер 2" style="width: 100%; max-height: 300px" />
+</div>
+
+<section>
+    <h2>Наши партнёры</h2>
+    <div class="partners">
+        {% for partner in partners %}
+        <p>{{ partner.name }}</p>
+        <a href="{{ partner.website }}" target="_blank">
+            <img src="{{ partner.logo.url }}" alt="{{ partner.name }}" style="width: 100px" />
+        </a>
+        {% endfor %}
+    </div>
+</section>
+
+<section>
+    <h1>Последняя опубликованная статья</h1>
+    <h2>{{ article.title }}</h2>
+    <p>{{ article.summary }}</p>
+    {% if article.image %}
+    <img src="{{ article.image.url }}" alt="{{ article.title }}" style="width: 100px" /> {% endif %}
+    <a href="{% url 'news_details' article.id %}">Читать далее</a>
+</section>
+
+<br /><br />
+
+<section>
+    <form method="GET" action="{% url 'home' %}">
+        <label for="sort_by_year">Сортировать по году:</label>
+        <select name="sort_by_year" id="sort_by_year">
+      <option value="">По умолчанию</option>
+      <option value="asc">По возрастанию</option>
+      <option value="desc">По убыванию</option>
+    </select>
+        <label for="sort_by_cost">Сортировать по цене:</label>
+        <select id="sort_by_cost" name="sort_by_cost">
+      <option value="">По умолчанию</option>
+      <option value="asc">По возрастанию</option>
+      <option value="desc">По убыванию</option>
+    </select>
+        <label for="sort_by_rental_cost">Сортировать по стоимости аренды в день:</label
+    >
+    <select id="sort_by_rental_cost" name="sort_by_rental_cost">
+      <option value="">По умолчанию</option>
+      <option value="asc">По возрастанию</option>
+      <option value="desc">По убыванию</option>
+    </select>
+    <button type="submit">Применить</button>
+  </form>
+</section>
+
+<section>
+  <div class="car-grid">
+    {% for car in cars %}
+    <a href="{% url 'car_detail' car.id %}" class="no-highlight-link">
+      <div class="car-info">
+        <h2>{{ car.license_plate }}</h2>
+        <img
+          src="{{ car.image.url }}"
+          width="400"
+          height="140"
+          alt="{% static 'images/no.jpg' %}"
+        />
+        <p>Model: {{ car.model }}</p>
+        <p>Body Type: {{ car.body_type }}</p>
+        <p>Year: {{ car.year }}</p>
+        <p>Car Cost: {{ car.car_cost }}</p>
+        <p>Rental Cost per Day: {{ car.rental_cost_per_day }}</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<article>
+  {% if user.is_authenticated %}
+  <br /><br />
+  <div class="user-info">
+    <p>Вы вошли как: {{ user.username }}</p>
+    <!-- Дополнительный контент для авторизованных пользователей -->
+    <p>Добро пожаловать, {{ user.username }}!</p>
+    {% if user.is_staff %}
+    <div class="admin-content">
+      <p>Вы являетесь администратором.</p>
+      <p>
+        Здесь может быть какая-то специфическая информация для администратора.
+      </p>
+    </div>
+    {% endif %}
+    <a href="{% url 'logout' %}" class="logout-btn">Выйти</a>
+  </div>
+  {% else %}
+  <div class="user-info">
+    <p>Вы не вошли</p>
+    <!-- Дополнительный контент для неавторизованных пользователей -->
+    <p>Добро пожаловать, гей!</p>
+  </div>
+  {% endif %} {% if user.is_authenticated %}
+  <br />
+  <h1>Календарь</h1>
+  {{ cal|safe }}
+  <p>Текущий UTC: {{ user_timezone }}</p>
+  <p>Текущая дата: {{ current_date }}</p>
+  {% endif %}
+
+  <video
+    width="560"
+    height="315"
+    controls
+    preload="metadata"
+    poster="{% static 'images/400x600.jpg' %}"
+  >
+    <track
+      kind="subtitles"
+      src="{% static 'videos/zxc.mp4' %}"
+      srclang="ru"
+      label="Русский"
+      default
+    />
+    <source src="{% static 'videos/zxc.mp4' %}" type="video/mp4" />
+    Ваш браузер не поддерживает видео в формате HTML5.</video
+  ><br /><br />
+  <iframe
+    frame
+    src="https://yandex.ru/map-widget/v1/?um=constructor%3Ad8f228a03c00625548dfc9e3719ccb326dec329acbc1f40c3ded9331bfbdade1&amp;source=constructor"
+    width="750"
+    height="465"
+    frameborder="0"
+  ></iframe>
+  {% endblock %}
+</article>

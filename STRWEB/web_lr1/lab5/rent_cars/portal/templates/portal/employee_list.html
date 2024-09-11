@@ -1,0 +1,21 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block title %}Сотрудники{% endblock %}
+
+{% block content %}
+    <h1>Сотрудники компании</h1>
+    <ul>
+        {% for employee in employees %}
+            <li>
+                <h3>{{ employee.user.username }}</h3>
+                {% if employee.photo %}
+                    <img src="{{ employee.photo.url }}" alt="{{ employee.user.username }}" style="width: 100px;">
+                {% endif %}
+                <p><strong>Должность:</strong> {{ employee.job_description }}</p>
+                <p><strong>Телефон:</strong> {{ employee.phone_number }}</p>
+                <p><strong>Email:</strong> {{ employee.email }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block title %} Шутка {% endblock %}
+
+{% block content %}
+    <div class="car-infoo">
+        <div class="foorm-control">
+            <h1>Случайная шутка:</h1>
+            <p>{{ joke.setup }}</p>
+            <p>{{ joke.punchline }}</p>
+
+            <p>{{ full_text }}</p>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block title %} Добавление промокода {% endblock %}
+
+{% block content %}
+    
+<h1>Добавление промокода</h1>
+<form class="login-form" method="post">
+    {% csrf_token %}
+    
+    {{ form.as_p }}
+
+    <button class="login-form" type="submit">Добавить промокод</button>
+</form>
+
+{% endblock %}

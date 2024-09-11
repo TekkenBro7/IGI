@@ -1,0 +1,15 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block title %} Создание машины {% endblock %}
+
+{% block content %}
+    <div class="login-form">
+            <form action="" method=POST enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="form-control" type="submit">Создать</button>
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            </form>
+        </div>
+{% endblock %}

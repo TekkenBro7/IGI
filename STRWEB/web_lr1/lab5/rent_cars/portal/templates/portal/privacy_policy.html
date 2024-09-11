@@ -1,0 +1,251 @@
+{% extends 'users/base.html' %} 
+
+{% load static %} 
+
+{% block title %} Политика конфиденциальности {% endblock %} {% block content %}
+
+<header>
+    <h1>Добро пожаловать на страницу политики конфиденциальности</h1>
+    <a href="#n1">В конец страницы</a>
+    <nav>
+        <ul>
+            <li><a href="#introduction">Введение</a></li>
+            <li><a href="#data-collection">Сбор данных</a></li>
+            <li><a href="#data-use">Использование данных</a></li>
+            <li><a href="#contact">Контакты</a></li>
+        </ul>
+    </nav>
+</header>
+
+<ul>
+    <li>
+        <a href="https://www.wikiwand.com/ru/HTML" target="fr">HTML</a>
+    </li>
+    <li>
+        <a href="https://www.wikiwand.com/ru/HTML5" target="fr">HTML5</a>
+    </li>
+</ul>
+<iframe name="fr" width="400" height="150">Old browser</iframe>
+
+<article itemscope itemtype="http://schema.org/Person" itemid="https://example.com/person123">
+    <h1 itemprop="name" tabindex="1">Иванов Иван</h1>
+    <span title="Работа" itemprop="jobTitle">Менеджер</span>
+    <input type="button" accesskey="t" /> At <time datetime="15:00">3 o'clock</time> on <time datetime="1984-12-7">December 7th</time>.
+    <br> метоксихлор<wbr>диэтиламино<wbr>метил<wbr>бутил<wbr>амино<wbr>акридин
+
+    <p>Событие состоится <time datetime="2024-09-10T18:30">10 сентября 2024 года, в 18:30</time>.
+
+    <br>
+    <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+        <span itemprop="streetAddress" id="street">Улица, дом 1</span>,
+        <span itemprop="addressLocality" id="city">Город</span>
+    </div>
+
+    <section id="introduction">
+        <h3 tabindex="2" dir="ltr">Введение</h3>
+        <p dir="rtl">Мы ценим вашу конфиденциальность и стремимся защищать ваши данные.</p>
+        <p dir="auto">защищать ваши данные.</p>
+        <q lang="en" translate="yes">То be or not to be</q>
+        <q lang="en" hidden cite="https://www.poetryfoundation.org/poems/56965/speech-to-be-or-not-to-be-that-is-the-question">То be or not to be</q>
+        <p><q lang="en" contenteditable="true" spellcheck="true">То be or not to be</q></p>
+    </section>
+
+    <section id="data-collection">
+        <h3>Сбор данных</h3>
+        <p>Мы собираем следующие данные: имя, адрес, телефон.</p>
+    </section>
+
+    <section id="data-use">
+        <h3>Использование данных</h3>
+        <p>Ваши данные используются для улучшения сервиса и связи с вами.</p>
+    </section>
+
+    <aside>
+        <h4>Дополнительная информация</h4>
+        <p>Для получения дополнительной информации, пожалуйста, свяжитесь с нами.</p>
+    </aside>
+
+</article>
+
+<p>
+    <blockquote cite="http://en.wikipedia.org/wiki/Apple">
+    The apple forms a tree that is small and deciduous, reaching 3 to 12 meters (9.8 to 39 ft) tall, with a broad, often densely twiggy crown.
+    </blockquote>
+        
+    
+    В веб-разработке <strong>семантическое выделение</strong> текста помогает подчеркнуть важные моменты. Это не только улучшает <em>читаемость</em>, но и делает контент более доступным.
+    <strong>Важно:</strong> Этот текст <mark>выделен</mark> для акцента.
+
+    Для вывода в консоль используйте <code>console.log()</code>.
+</p>
+    <blockquote> "Нельзя дважды войти в одну и ту же реку." </blockquote>
+    <cite>Война и мир</cite><br><br>
+
+    <p>- <dfn title="apple">Программирование</dfn> - процесс создания и модификации компьютерных программ. </p>
+    <p><abbr title="Белорусский Государственный Университет  Информатики и Радиоэлектроники">БГУИР</abbr></p>
+
+    <font size="5" color="red" face="Arial">Lorem ipsum dolor sit</font> amet, consectetur adipiscing elit. Sed commodo finibus iaculis. Maecenas lorem urna, iaculis quis ipsum eu, bibendum imperdiet ipsum. Pellentesque sollicitudin, enim nec varius pulvinar, leo lacus consectetur nibh, nec
+    tincidunt felis est at orci. Mauris sodales sem
+    
+
+        <pre>
+            function f(x) {
+                if (x > 0)
+                    alert(x);
+            }
+        </pre>
+
+        <p>
+            Я помню чудное мгновенье:<br>
+            Передо мной явилась ты,<br>
+            Как мимолетное виденье,<br>
+            Как гений чистой красоты.<br>
+        </p>
+
+        <p>Этот код на JavaScript показывает, как вывести текст в консоль:</p>
+        <code>console.log('Привет, мир!');</code>
+        <p>Переменная <var>x</var> в следующем уравнении обозначает неизвестное значение: <var>x</var> + 5 = 10.</p>
+        <p>Вывод программы на Python:</p>
+        <pre><samp>Введите ваше имя: Иван 
+    Привет, Иван!</samp></pre>
+
+        <p>Для копирования текста используйте комбинацию клавиш: <kbd>Ctrl</kbd> + <kbd>C</kbd>.</p>
+        <p>
+            <audio controls>
+            <source src="{% static 'music/music1.mp3' %}" type="audio/mpeg">
+            Ваш браузер не поддерживает элемент audio.
+        </audio>
+        </p>
+
+
+
+        <p>
+            <dl>
+                <dt>HTML</dt>
+                <dd>Язык разметки для создания веб-страниц.</dd>
+
+                <dt>CSS</dt>
+                <dd>Язык стилей для оформления веб-страниц ахах ахахах ах а.</dd>
+
+                <dt>JavaScript</dt>
+                <dd>Язык программирования для создания интерактивных элементов на веб-страницах.</dd>
+            </dl>
+        </p>
+        <p>
+            <ul reversed type="square">
+                <li>Цитрусовые
+                    <ol>
+                        <li>Апельсин</li>
+                        <li>Лимон</li>
+                        <li>Грейпфрут</li>
+
+                    </ol>
+                </li>
+                <li type="circle">Ягоды
+                    <ol>
+                        <li>Клубника</li>
+                        <li>Малина</li>
+                        <li>Черника</li>
+                    </ol>
+                </li>
+            </ul>
+        </p>
+        <p>
+            <ol type="A" start="10">
+                <li>Son</li>
+                <li value="1">Mother</li>
+                <li>Father</li>
+            </ol>
+        </p>
+
+        <figure>
+            <img src="{% static 'images/no.jpg' %}" alt="Описание изображения" style="max-width: 100%; height: auto;">
+            <figcaption>Пустое фото.</figcaption>
+        </figure>
+
+        <p>
+            <details open>
+                <summary>Kinds of Triathlon</summary>
+                There are different kinds of triathlon - sprint, Olympic and so on. I am aiming for Olympic, which consists of the following:
+                <ol>
+                    <li>1.5km swim</li>
+                    <li>40km cycle</li>
+                    <li>10km run</li>
+                </ol>
+            </details>
+        </p>
+
+        <form>
+            <fieldset title="form info">
+                <legend>Форма для заполнения</legend>
+                <label for="email">Электронная почта:</label>
+                <input type="email" id="email" name="email">
+                <label for="age">Возраст:</label>
+                <input type="number" id="age" name="age" min="1" max="100" required>
+                <label for="website">Веб-сайт:</label>
+                <input type="url" id="website" name="website" pattern="https?://.+">
+                <p>Выберите пол:</p>
+                <label>
+                <input type="radio" name="gender" value="male" required> Мужчина
+            </label>
+                <label>
+                <input type="radio" name="gender" value="female" required> Женщина
+            </label>
+                <br>
+                <label for="fileUpload">Загрузить файл:</label>
+                <input type="file" id="fileUpload" name="fileUpload" accept=".jpg, .png, .pdf">
+                <br>
+                <label>
+                <input type="checkbox" name="subscribe" value="yes"> Подписаться на рассылку
+            </label>
+                <br>
+                <input type="range" name="range" min="10" max="20">
+                <br>
+                <input type="button" name="btn1" value="Просто кнопка">
+                <button type="reset">Cбросить</button>
+                <button type="submit">Отправить</button>
+            </fieldset>
+
+            <p>
+                <mark>Выделенный текст</mark>
+            </p>
+            <p>
+                <del>Удаленный текст</del>
+            </p>
+            <p>
+                <ins>Добавленный текст</ins>
+            </p>
+            <p>
+                <s>Зачеркнутый текст</s>
+            </p>
+            <p>
+                <u>Подчеркнутый текст</u>
+            </p>
+            <p>
+                <sub>Надстрочный текст</sub>
+            </p>
+            <p>
+                <sup>Подстрочный текст</sup>
+            </p>
+
+            <audio controls>
+                <source src="{% static 'music/music1.mp3' %}" type="audio/mpeg">
+                Ваш браузер не поддерживает аудиоформат.
+            </audio>
+
+            <picture>
+                <source srcset="{% static 'images/1300x400.jpg' %}" type="image/jpeg" media="(min-width: 1330px)">
+                <source srcset="{% static 'images/800x400.jpg' %}" type="image/jpeg" media="(min-width: 992px)">
+                <source srcset="{% static 'images/400x600.jpg' %}" type="image/jpeg" media="(max-width: 992px)">
+                <img src="{% static 'images/1300x400.jpg' %}" alt="Изображение">
+            </picture>
+            <br>
+
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/nEcWFbM6ngc?si=uglvvInO4j6a95WZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+        </form>
+
+        <a id="n1"></a>
+
+        {% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block title %}Отзывы{% endblock %}
+
+{% block content %}
+    <h1>Отзывы</h1>
+    <ul>
+        {% for review in reviews %}
+            <li>
+                <strong>{{ review.user.username }}</strong> (Рейтинг: {{ review.rating }})<br>
+                <p>{{ review.text }}</p>
+                <em>Дата: {{ review.date }}</em>
+            </li>
+        {% endfor %}
+    </ul>
+
+    {% if user.is_authenticated and user.is_customer %}       
+        <a href="{% url 'add_review' %}">Добавить отзыв</a>
+    {% endif %}
+{% endblock %}
