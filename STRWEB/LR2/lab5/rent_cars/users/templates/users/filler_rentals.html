@@ -1,0 +1,104 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block title %} Фильтр заказов {% endblock %}
+
+{% block content %}
+    <div class="container order-filter-page"> <!-- Уникальный класс для этой страницы -->
+        <div class="search-form">        
+            <form method="GET" action="{% url 'filter_rentals' %}" class="search-form">
+                <div class="form-group">
+                    <label for="model_type">Car:</label>
+                    <input type="text" name="search_name" placeholder="Search by name">
+                </div>
+
+                <div class="form-group">
+                    <label for="car_type">Car type:</label>
+                    <select name="car_type" id="car_type">
+                        <option value="">Select car type</option>
+                        {% for car_type in car_types %}
+                            <option value="{{ car_type.id }}">{{ car_type.model }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="year">Rental days:</label>
+                    <input type="number" id="year" name="search_days" placeholder=">= selected day">
+                </div>
+
+                <div class="form-group">
+                    <label for="discount">Discount:</label>
+                    <select name="discount" id="discount">
+                        <option value="">All</option>
+                        <option value="True">With</option>
+                        <option value="False">Without</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="sort_by">Sort by:</label>
+                    <select name="sort_by" id="sort_by">
+                        <option value="">Select a criterion</option>
+                        <option value="name">Car model</option>
+                        <option value="days">Rental days</option>
+                        <option value="amount">Total amount</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn-filter">Filter</button>
+                </div>
+            </form>
+        </div>
+
+        <table class="rental-table">
+            <thead>
+                <tr>
+                    <th>Car</th>
+                    <th>Renter</th>
+                    <th>Rental Date</th>
+                    <th>Rental Days</th>
+                    <th>Expected Return Date</th>
+                    <th>Promocode</th>
+                    <th>Discount</th>
+                    <th>Total Amount</th>
+                    <th>Penalties</th>
+                    <th>More</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if filtered_rentals %}
+                    {% for rental in filtered_rentals %}
+                    <tr class="{% if rental.is_pass %}completed{% endif %}">
+                        <td class="{% if not rental.car %}empty-cell{% endif %}">{{ rental.car|default:"Нет данных" }}</td>
+                        <td class="{% if not rental.client %}empty-cell{% endif %}">{{ rental.client|default:"Нет данных" }}</td>
+                        <td class="{% if not rental.rental_date %}empty-cell{% endif %}">{{ rental.rental_date|default:"Нет данных" }}</td>
+                        <td class="{% if rental.rental_days == 0 %}empty-cell{% endif %}">{{ rental.rental_days|default:"Нет данных" }}</td>
+                        <td class="{% if not rental.expected_return_date %}empty-cell{% endif %}">{{ rental.expected_return_date|default:"Нет данных" }}</td>
+                        <td class="{% if not rental.promocode %}empty-cell{% endif %}">{{ rental.promocode|default:"Нет данных" }}</td>
+                        <td class="{% if not rental.discount %}empty-cell{% endif %}">{{ rental.discount|default:"Нет данных" }}</td>
+                        <td class="{% if rental.total_amount == 0 %}empty-cell{% endif %}">{{ rental.total_amount|default:"Нет данных" }}</td>
+                        <td>
+                            <ul>
+                                {% for penalty in rental.penalty.all %}
+                                <li>{{ penalty }}</li>
+                                {% empty %}
+                                <p class ="empty-cell">Нет данных</p>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td><a href="{% url 'rental_details' rental.id %}">Подробнее</a></td>
+                    </tr>
+                    
+                    {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="10">Нет совпадений.</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+        <br><br>
+    </div>
+{% endblock %}

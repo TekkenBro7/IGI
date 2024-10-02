@@ -1,0 +1,68 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block title %} Клиент {% endblock %}
+
+{% block content %}
+<div class="client-list-table">
+    <table class="client-table">
+        <caption>Список клиентов</caption>
+        <thead>
+            <tr>
+                <th id="username">Имя пользователя</th>
+                <th id="first_name">Имя</th>
+                <th id="last_name">Фамилия</th>
+                <th id="email">Почта</th>
+                <th id="phone">Телефон</th>
+                <th id="regular_customer">Регулярный клиент</th>
+                <th id="age">Лет</th>
+                <th id="first_time">Впервые</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in clients %}
+            <tr>
+                <td headers="username">{{ client.user.username }}</td>
+                <td headers="first_name">{{ client.user.first_name }}</td>
+                <td headers="last_name">{{ client.user.last_name }}</td>
+                <td headers="email">{{ client.user.email }}</td>
+                <td headers="phone">{{ client.phone }}</td>
+                <td headers="regular_customer">{{ client.is_regular_customer }}</td>
+                <td headers="age">{{ client.age }}</td>
+                <td headers="first_time">{% if client.is_first_time %}Да{% else %}Нет{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% if user.is_authenticated and user.is_superuser %}
+    {% if employees %}
+        <div class="employee-list-table">
+            <table class="employee-table">
+                <caption>Список сотрудников</caption>
+                <thead>
+                    <tr>
+                        <th>Имя пользователя</th>
+                        <th>Имя</th>
+                        <th>Фамилия</th>
+                        <th>Почта</th>
+                        <th>Лет</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in employees %}
+                    <tr>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.first_name }}</td>
+                        <td>{{ user.last_name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.age }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+{% endif %}
+{% endblock %}

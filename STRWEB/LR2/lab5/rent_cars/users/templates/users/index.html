@@ -1,0 +1,164 @@
+{% extends 'users/base.html' %} {% load static %} {% block title %} Главная {% endblock %} {% block content %}
+
+<h1>Добро пожаловать на наш сайт!</h1>
+<p class="introduction">Здесь вы можете найти информацию о нашем сервисе проката автомобилей.</p>
+
+<div class="container-loader">
+  <div class="loader">
+    <div class="line line-1"></div>
+    <div class="line line-2"></div>
+  </div>
+</div>
+
+<br>
+
+<div class="scene">
+  <div class="person"></div>
+  <div class="car">
+    <div class="person-head"></div> 
+    <div class="headlight left"></div> 
+    <div class="headlight right"></div>
+  </div>
+  <div class="company-name-anim">Прокат премиум</div>
+</div>
+
+
+
+<p>
+    <em>Аренда автомобилей</em> <i>like</i> <b>седаны</b> <i>and</i> <b>внедорожники</b>. Аренда внедорожника в нашем агентстве стоит <s>$100 в день</s> $80 за день
+    <small>(плюс налоги)</small>. <strong>Внимание:</strong> Арендуя
+    <u>слишком много</u> автомобилей одновременно, вы можете столкнуться с трудностями. Пункт x<sub>5</sub> — это 5<sup>й</sup> пункт в нашем списке.
+</p>
+
+
+<div class="all">
+    <article id="slider">
+        <input checked type="radio" name="slider" id="switch1">
+        <input type="radio" name="slider" id="switch2">
+        <input type="radio" name="slider" id="switch3">
+        <input type="radio" name="slider" id="switch4">
+        <input type="radio" name="slider" id="switch5">
+        <div id="slides">
+            <div id="overflow">
+                <div class="image">
+                    <article><img src="{% static 'images/ban3.jpg' %}" alt="Image 1"></article>
+                    <article><img src="{% static 'images/ban2.jpg' %}" alt="Image 1"></article>
+                    <article><img src="{% static 'images/ban1.jpg' %}" alt="Image 1"></article>
+                    <article><img src="{% static 'images/ban4.jpg' %}" alt="Image 1"></article>
+                    <article><img src="{% static 'images/ban5.jpg' %}" alt="Image 1"></article>
+                </div>
+            </div>
+        </div>
+        <div id="controls">
+            <label for="switch1"></label>
+            <label for="switch2"></label>
+            <label for="switch3"></label>
+            <label for="switch4"></label>
+            <label for="switch5"></label>
+        </div>
+        <div id="active">
+            <label for="switch1"></label>
+            <label for="switch2"></label>
+            <label for="switch3"></label>
+            <label for="switch4"></label>
+            <label for="switch5"></label>
+        </div>
+    </article>
+</div>
+
+
+<section>
+    <h2>Наши партнёры</h2>
+    <div class="partners">
+        {% for partner in partners %}
+        <div class="partner-block">
+            <a href="{{ partner.website }}" target="_blank">
+                <img src="{{ partner.logo.url }}" alt="{{ partner.name }}" />
+            </a>
+            <p>{{ partner.name }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<br>
+<h1>Последняя опубликованная статья</h1>
+<section class="latest-article">
+    <h2 class="article-title">{{ article.title }}</h2>
+    <p class="article-summary">{{ article.summary }}</p>
+    {% if article.image %}
+    <img class="article-image" src="{{ article.image.url }}" alt="{{ article.title }}" /> {% endif %}
+    <a class="read-more" href="{% url 'news_details' article.id %}">Читать далее</a>
+</section>
+
+<br>
+
+<section class="sort-form">
+    <form method="GET" action="{% url 'home' %}">
+        <label for="sort_by_year">Сортировать по году:</label>
+        <select name="sort_by_year" id="sort_by_year">
+      <option value="">По умолчанию</option>
+      <option value="asc">По возрастанию</option>
+      <option value="desc">По убыванию</option>
+    </select>
+        <label for="sort_by_cost">Сортировать по цене:</label>
+        <select id="sort_by_cost" name="sort_by_cost">
+      <option value="">По умолчанию</option>
+      <option value="asc">По возрастанию</option>
+      <option value="desc">По убыванию</option>
+    </select>
+        <label for="sort_by_rental_cost">Сортировать по стоимости аренды в день:</label
+    >
+    <select id="sort_by_rental_cost" name="sort_by_rental_cost">
+      <option value="">По умолчанию</option>
+      <option value="asc">По возрастанию</option>
+      <option value="desc">По убыванию</option>
+    </select>
+    <button type="submit">Применить</button>
+  </form>
+</section>
+
+<section>
+  <div class="car-grid">
+    {% for car in cars %}
+    <a href="{% url 'car_detail' car.id %}" class="no-highlight-link">
+      <div class="car-info">
+        <h2>{{ car.license_plate }}</h2>
+        <img
+          src="{{ car.image.url }}"
+          width="400"
+          height="140"
+          alt="{% static 'images/no.jpg' %}"
+        />
+        <p>Model: {{ car.model }}</p>
+        <p>Body Type: {{ car.body_type }}</p>
+        <p>Year: {{ car.year }}</p>
+        <p>Car Cost: {{ car.car_cost }}</p>
+        <p>Rental Cost per Day: {{ car.rental_cost_per_day }}</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<article>
+  {% if user.is_authenticated %}
+  <br />
+  <h1>Календарь</h1>
+  <div class="calendar-container">
+    {{ cal|safe }}
+  </div>
+  <p>Текущий UTC: {{ user_timezone }}</p>
+  <p>Текущая дата: {{ current_date }}</p>
+  {% endif %}
+  <br/>
+  <iframe class="yandex"
+    frame
+    src="https://yandex.ru/map-widget/v1/?um=constructor%3Ad8f228a03c00625548dfc9e3719ccb326dec329acbc1f40c3ded9331bfbdade1&amp;source=constructor"
+    height="500"
+    frameborder="10"
+  ></iframe>
+</div>
+</article>
+
+{% endblock %}

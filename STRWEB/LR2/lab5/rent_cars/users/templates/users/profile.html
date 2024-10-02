@@ -1,0 +1,74 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block title %} Профиль {% endblock %}
+
+{% block content %}
+    
+    <h1>Профиль пользователя</h1>    
+    <h2>Корзина</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Автомобиль</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in carts %}
+                <tr>
+                    <td>{{ item.car.license_plate }}</td>
+                    <td>
+                    <a href="{% url 'order_car' item.car.id %}" class="btn">Заказать</a>
+                        <form action="{% url 'remove_from_cart' item.id %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="btn">Удалить</button>
+                        </form>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td>Корзина пуста.</td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+        
+        <br><br>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Car</th>
+                    <th>Rental Date</th>
+                    <th>Rental Days</th>
+                    <th>Expected Return Date</th>
+                    <th>Total Amount</th>
+                    <th>Promocode</th>
+                    <th>Discount</th>
+                    <th>Penalties</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rental in rentals %}
+                    <tr>
+                        <td>{{ rental.car }}</td>
+                        <td>{{ rental.rental_date }}</td>
+                        <td>{{ rental.rental_days }}</td>
+                        <td>{{ rental.expected_return_date }}</td>
+                        <td>{{ rental.total_amount }}</td>
+                        <td>{{ rental.promocode }}</td>
+                        <td>{{ rental.discount }}</td>
+                        <td>
+                            <ul>
+                                {% for penalty in rental.penalty.all %}
+                                    <li>{{ penalty }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}

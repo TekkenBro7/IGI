@@ -1,0 +1,23 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block title %}Новости{% endblock %}
+
+{% block content %}
+<h1>Новости</h1>
+
+<div class="article-list">
+    {% for article in articles %}
+    <div class="article-item">
+        <h2>{{ article.title }}</h2>
+        <p class="article-summary">{{ article.summary }}</p>
+        {% if article.image %}
+            <img src="{{ article.image.url }}" alt="{{ article.title }}" class="article-image">
+        {% endif %}
+        <div class="button-container">
+            <a href="{% url 'news_details' article.id %}" class="read-more">Читать далее</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,147 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block title %}Бонусы{% endblock %}
+
+{% block content %}
+
+<div class="all-items-content">
+
+<div class="bonus-section-penalties">
+    <h2>Штрафы</h2>
+    <h3>Действующие штрафы</h3>
+    <ul>
+        {% for penalty in active_penalties %}
+        <li>{{ penalty.name }} - {{ penalty.percentage }}%</li>
+        <form method="post" action="{% url 'penalty_delete' penalty.id %}">
+            {% csrf_token %}
+            {% if user.is_authenticated and user.is_superuser %}
+            <button type="submit">Удалить</button>
+            {% endif %}
+        </form>
+        {% if user.is_authenticated and user.is_superuser %}
+        <a href="{% url 'penalty_edit' penalty.id %}">Изменить</a>
+        {% endif %}
+        {% empty %}
+        <li>Нет действующих штрафов</li>
+        {% endfor %}
+    </ul>
+    
+    <h3>Архив штрафов</h3>
+    <ul>
+        {% for penalty in inactive_penalties %}
+        <li>{{ penalty.name }} - {{ penalty.percentage }}%</li>
+        <form method="post" action="{% url 'penalty_delete' penalty.id %}">
+            {% csrf_token %}
+            {% if user.is_authenticated and user.is_superuser %}
+            <button type="submit">Удалить</button>
+            {% endif %}
+        </form>
+        {% if user.is_authenticated and user.is_superuser %}
+        <a href="{% url 'penalty_edit' penalty.id %}">Изменить</a>
+        {% endif %}
+        {% empty %}
+            <li>Нет архивных штрафов</li>
+        {% endfor %}
+    </ul>
+
+    {% if user.is_authenticated and user.is_superuser %}
+    <br>
+    <a href="{% url 'penalty_add' %}">Добавить штраф</a>
+    {% endif %}
+</div>
+
+<!-- Промокоды -->
+<div class="bonus-section-promocodes">
+    <h2>Промокоды</h2>
+
+    <h3>Действующие промокоды</h3>
+    <ul>
+        {% for promo_code in active_promo_codes %}
+        <li>{{ promo_code.code }} - {{ promo_code.discount_percentage }}%</li>
+        <form method="post" action="{% url 'promocode_delete' promo_code.id %}">
+            {% csrf_token %}
+            {% if user.is_authenticated and user.is_superuser %}
+            <button type="submit">Удалить</button>
+            {% endif %}
+        </form>
+        {% if user.is_authenticated and user.is_superuser %}
+        <a href="{% url 'promocode_edit' promo_code.id %}">Изменить</a>
+        {% endif %}
+        {% empty %}
+            <li>Нет действующих промокодов</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Архив промокодов</h3>
+    <ul>
+        {% for promo_code in inactive_promo_codes %}
+        <li>{{ promo_code.code }} - {{ promo_code.discount_percentage }}%</li>
+        <form method="post" action="{% url 'promocode_delete' promo_code.id %}">
+            {% csrf_token %}
+            {% if user.is_authenticated and user.is_superuser %}
+            <button type="submit">Удалить</button>
+            {% endif %}
+        </form>
+        {% if user.is_authenticated and user.is_superuser %}
+        <a href="{% url 'promocode_edit' promo_code.id %}">Изменить</a>
+        {% endif %}
+        {% empty %}
+            <li>Нет архивных промокодов</li>
+        {% endfor %}
+    </ul>
+
+    {% if user.is_authenticated and user.is_superuser %}
+    <br>
+    <a href="{% url 'promocode_add' %}">Добавить промокод</a>
+    {% endif %}
+</div>
+
+<!-- Скидки -->
+<div class="bonus-section-discounts">
+    <h2>Скидки</h2>
+    <h3>Действующие скидки</h3>
+    <ul>
+        {% for discount in active_discounts %}
+        <li>{{ discount.name }} - {{ discount.percentage }}%</li>
+        <form method="post" action="{% url 'discount_delete' discount.id %}">
+            {% csrf_token %}
+            {% if user.is_authenticated and user.is_superuser %}
+            <button type="submit">Удалить</button>
+            {% endif %}
+        </form>
+        {% if user.is_authenticated and user.is_superuser %}
+        <a href="{% url 'discount_edit' discount.id %}">Изменить</a>
+        {% endif %}
+        {% empty %}
+            <li>Нет действующих скидок</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Архив скидок</h3>
+    <ul>
+        {% for discount in inactive_discounts %}
+        <li>{{ discount.name }} - {{ discount.percentage }}%</li>
+        <form method="post" action="{% url 'discount_delete' discount.id %}">
+            {% csrf_token %}
+            {% if user.is_authenticated and user.is_superuser %}
+            <button type="submit">Удалить</button>
+            {% endif %}
+        </form>
+        {% if user.is_authenticated and user.is_superuser %}
+        <a href="{% url 'discount_edit' discount.id %}">Изменить</a>
+        {% endif %}
+        {% empty %}
+            <li>Нет архивных скидок</li>
+        {% endfor %}
+    </ul>
+
+    {% if user.is_authenticated and user.is_superuser %}
+    <br>
+    <a href="{% url 'discount_add' %}">Добавить скидку</a>
+    {% endif %}
+</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,493 @@
+/* Настройка отступов и полей */
+
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Roboto', Arial, sans-serif;
+    margin: 10px;
+    padding: 0;
+    line-height: 1.1;
+}
+
+.introduction::first-letter {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+h1,
+h2,
+h3 {
+    text-transform: uppercase;
+    padding-left: 0;
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+}
+
+
+/* Красная строка (отступ для абзацев) */
+
+p {
+    text-indent: 25px;
+    margin-bottom: 15px;
+}
+
+
+/* Оформление текста в капитель */
+
+.capitalized-text {
+    font-variant: small-caps;
+}
+
+
+/* Межбуквенные и межсловные интервалы */
+
+p,
+h1,
+h2,
+h3,
+.capitalized-text {
+    letter-spacing: 1px;
+    word-spacing: 3px;
+}
+
+
+/* Перенос и разрыв слов */
+
+p {
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+
+/* Глобальные стили для шрифтов */
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+section {
+    margin: 20px 0;
+    padding: 10px;
+}
+
+a img[src*="facebook.png"],
+a img[src*="instagram.png"],
+a img[src*="twitter.png"] {
+    width: 50px;
+    height: 50px;
+    border-radius: 4 0%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+a img[src*="facebook.png"]:hover,
+a img[src*="instagram.png"]:hover,
+a img[src*="twitter.png"]:hover {
+    transform: scale(1.5);
+}
+
+a[href$="mail.com"] {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.yandex {
+    width: 99%;
+    margin-right: -100px;
+    padding-right: 0;
+}
+
+
+/* Стили для списка клиентов */
+
+.client-list-table,
+.employee-list-table {
+    max-width: 80%;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Стили для таблицы клиентов и сотрудников */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    table-layout: auto;
+}
+
+th,
+td {
+    padding: 12px 15px;
+    text-align: left;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+}
+
+thead th {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+
+/* Для четных */
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tbody tr:hover {
+    background-color: #e9ecef;
+    transition: background-color 0.5s;
+}
+
+
+/* Стили для пустых ячеек */
+
+td:empty {
+    background-color: rgb(154, 151, 151);
+}
+
+caption {
+    text-align: center;
+    color: #007bff;
+    font-size: 30px;
+    margin-bottom: 0px;
+    font-weight: bold;
+    caption-side: top;
+}
+
+.context-text::first-line {
+    color: #ff9100;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.context-text::before {
+    content: "Start of the fragment: ";
+    font-style: italic;
+    color: gray;
+}
+
+.context-text::after {
+    content: " [End of the fragment]";
+    font-style: italic;
+    color: gray;
+}
+
+.custom-bullets {
+    list-style: none;
+    font-size: 23px;
+}
+
+.custom-bullets li::before {
+    content: "\2714";
+    color: green;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+
+/* Выделенный текст */
+
+::selection {
+    background-color: #ff6347;
+    color: white;
+}
+
+.selectable-text {
+    font-size: 20px;
+}
+
+.selectable-text::selection {
+    background-color: rgb(255, 255, 3);
+    color: #e9acac;
+}
+
+q {
+    margin-left: 20px;
+}
+
+blockquote {
+    margin-left: 20px;
+}
+
+blockquote[lang="en"]::before {
+    content: '“';
+}
+
+blockquote[lang="en"]::after {
+    content: '”';
+}
+
+blockquote[lang="fr"]::before {
+    content: '«';
+}
+
+blockquote[lang="fr"]::after {
+    content: '»';
+}
+
+blockquote[lang="ru"]::before {
+    content: "'";
+}
+
+blockquote[lang="ru"]::after {
+    content: "'";
+}
+
+h1.h1-variant {
+    font-variant: small-caps;
+    text-transform: none;
+}
+
+#exm_nav .exm {
+    background-color: rgb(77, 25, 25);
+    /* Элементы с классом .menu внутри элемента с id #header */
+}
+
+.multi-column {
+    column-count: 3;
+    column-gap: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+
+/* Стили для заголовков в колонках */
+
+.card.featured {
+    background-color: #f0f0f0;
+    border: 2px solid #007bff;
+}
+
+.card {
+    background-color: #ff6347;
+}
+
+.content-example p {
+    color: #333;
+    font-size: 25px;
+}
+
+.container-example>p {
+    font-weight: bold;
+    color: #007bff;
+}
+
+
+/* h2, непосредственно вложенное в класс */
+
+.multi-column>h2 {
+    font-size: 30px;
+    column-span: all;
+    text-align: center;
+}
+
+
+/* p непосредственно после h2 */
+
+.container2-example h2+p {
+    color: green;
+    font-size: 18px;
+}
+
+
+/* выбор всех p которые за h2 */
+
+.container3-example h2~p {
+    color: rgb(236, 7, 7);
+    font-size: 18px;
+}
+
+.container4-example>* {
+    margin: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+a:visited {
+    color: rgb(0, 0, 0);
+}
+
+ul.ul-el li:first-child {
+    color: green;
+}
+
+ul.ul-el li:last-child {
+    color: blue;
+}
+
+ul.ul-el li:nth-child(2n) {
+    color: red;
+}
+
+table.table-example tbody tr:first-child td {
+    background-color: lightblue;
+}
+
+table.table-example tbody tr:last-child td {
+    background-color: lightgreen;
+}
+
+table.table-example tbody tr:nth-child(2) td {
+    background-color: lightcoral;
+}
+
+.my-form {
+    width: 50%;
+}
+
+.my-form input:required {
+    border: 2px solid red;
+}
+
+.my-form input:optional {
+    border: 2px solid green;
+}
+
+.my-form input:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+.my-form input:out-of-range {
+    border: 2px solid orange;
+}
+
+.my-form input:in-range {
+    border: 2px solid rgb(89, 0, 255);
+}
+
+.my-form input:valid {
+    border: 5px solid rgb(89, 0, 255);
+}
+
+.my-form input[type="checkbox"]:checked {
+    accent-color: rgb(255, 200, 0);
+}
+
+.my-form input[type="radio"]:checked {
+    accent-color: blue;
+}
+
+
+/* Оформляем заглавные буквы about_company */
+
+.content-wrapper>.title {
+    text-transform: none;
+    font-variant: small-caps;
+    font-size: 28px;
+    letter-spacing: 2px;
+    word-spacing: 6px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.content-wrapper>.company-name {
+    text-transform: uppercase;
+    font-size: 24px;
+    letter-spacing: 1px;
+    word-spacing: 3px;
+    margin-bottom: 15px;
+}
+
+
+/* Перенос и разрыв слов */
+
+.content-wrapper>.description,
+.content-wrapper>.history,
+.content-wrapper>.legal-name,
+.content-wrapper>.address {
+    word-wrap: break-word;
+    word-break: break-all;
+    line-height: 1.6;
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 10px;
+}
+
+
+/* Интервал между словами и символами */
+
+.content-wrapper>.registration-number {
+    letter-spacing: 1.5px;
+    word-spacing: 4px;
+    color: #555;
+}
+
+
+/* Активные тексты */
+
+.content-wrapper>.download-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    position: relative;
+    padding-bottom: 2px;
+    transition: color 0.3s ease;
+}
+
+.content-wrapper>.download-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+
+/* Позиционирование блоков */
+
+.content-wrapper {
+    z-index: 0;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.content-wrapper>.video-title {
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+
+/* Размещение видео по центру */
+
+.content-wrapper>video {
+    display: block;
+    margin: 0 auto;
+}
+
+audio,
+video {
+    display: block;
+    margin: 20px auto;
+    width: 80%;
+    border: 5px solid #201f1f;
+    border-radius: 10px;
+}
+
+span {
+    font-size: 18pt;
+}
+
+.fontL {
+    font-variant-ligatures: common-ligatures;
+}

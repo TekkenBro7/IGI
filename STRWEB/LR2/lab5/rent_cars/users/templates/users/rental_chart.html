@@ -1,0 +1,50 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block title %} Статистика {% endblock %}
+
+{% block content %} 
+
+    <div id="chart-container">{{ plot_div|safe }}</div>
+    
+    <div class="client-list-table">
+        <table class="client-table">
+            <caption>Список клиентов</caption>
+            <thead>
+                <tr>
+                    <th id="username">Имя пользователя</th>
+                    <th id="first_name">Имя</th>
+                    <th id="last_name">Фамилия</th>
+                    <th id="email">Почта</th>
+                    <th id="phone">Телефон</th>
+                    <th id="regular_customer">Регулярный клиент</th>
+                    <th id="age">Лет</th>
+                    <th id="first_time">Впервые</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for client in clients %}
+                <tr>
+                    <td headers="username">{{ client.user.username }}</td>
+                    <td headers="first_name">{{ client.user.first_name }}</td>
+                    <td headers="last_name">{{ client.user.last_name }}</td>
+                    <td headers="email">{{ client.user.email }}</td>
+                    <td headers="phone">{{ client.phone }}</td>
+                    <td headers="regular_customer">{{ client.is_regular_customer }}</td>
+                    <td headers="age">{{ client.age }}</td>
+                    <td headers="first_time">{% if client.is_first_time %}Да{% else %}Нет{% endif %}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <h1>Статистика продаж</h2>
+        <div class="info-statistics">
+            <p><strong>Всего заработано:</strong> {{ total_sales }}</p>
+            <p><strong>Средняя аренда:</strong> {{ average_sales }}</p>
+            <p><strong>Мода:</strong> {{ sales_mode }}</p>
+            <p><strong>Медиана:</strong> {{ sales_median }}</p>
+            <p><strong>Самая арендуемая машина:</strong> {{ model_name }} - {{ rental_count }} продаж</p>
+            <p><strong>Самая прибыльная машина:</strong> {{ most_profitable_type }}</p>
+        </div>
+{% endblock %}
