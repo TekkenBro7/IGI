@@ -1,0 +1,16 @@
+{% extends 'users/base.html' %} {% load static %} {% block title %}{{ article.title }}{% endblock %} {% block content %}
+
+
+<div class="article-container">
+    <h1>{{ article.title }}</h1>
+    <p><strong>Дата создания:</strong> {{ article.time_create }}</p>
+
+    {% if article.image %}
+    <img src="{{ article.image.url }}" alt="{{ article.title }}" /> {% endif %}
+    <h2>Содержание:</h2>
+    <pre>{{ article.content | safe }}</pre>
+
+    <a href="javascript:history.back();">Назад к новостям</a>
+</div>
+
+{% endblock %}

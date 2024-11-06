@@ -1,0 +1,67 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block title %} О компании {% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <h1 class="title">Добро пожаловать на страницу информации о компании</h1>
+        <h2 class="company-name">{{ company.name }}</h2>
+        <img src="{{ company.logo.url }}" alt="{{ company.name }} Логотип" class="company-logo">
+        <p class="description"><strong>Описание:</strong> {{ company.description }}</p>
+        <p class="history"><strong>История:</strong> {{ company.history }}</p>
+        
+        <p class="legal-name"><strong>Юридическое название:</strong> {{ company.legal_name }}</p>
+        <p class="address"><strong>Адрес:</strong> {{ company.address }}</p>
+        <p class="registration-number"><strong>Регистрационный номер:</strong> {{ company.registration_number }}</p>
+        
+        <p class="requisites"><strong>Банковские реквизиты:</strong> {{ company.bank_details }}</p>
+        
+        {% if company.video %}
+            <h3 class="video-title">Видео о компании:</h3>
+            <video width="600" controls>
+                <source src="{{ company.video.url }}" type="video/mp4">
+                Ваш браузер не поддерживает видео тег.
+            </video>
+        {% endif %}
+
+        <div class="certificate"> 
+            <h2>свидетельство</h2> 
+            <h1>Аренда авто</h1> 
+            <h3>о соотвествии нормам сдачи машины в аренду</h3> 
+            
+            <div class="main_info"> 
+                <p>ООО "Прокат Премиум"</p> 
+                <p><em>Рег. номер: {{ company.registration_number }}</em></p> 
+            </div> 
+            <div class="sign">
+                <div class="recipient">
+                  <span>Получатель<br>Снежко М. А.</span>
+                </div>
+                <div class="signature">
+                  <img class src="{% static 'images/sign2.png' %}" alt="sign">
+                </div>
+            </div>
+            <hr> 
+            <div class="certificate_footer"> 
+                <div class="cert_footer_item"> 
+                    <img src="{{ company.logo.url }}" alt="{{ company.name }} Image" height="100"> 
+                </div> 
+                <div class="cert_footer_item"> 
+                    <ul class="cert_list"> 
+                        <li>+375(44)578-83-37-</li> 
+                        <li>maks.kreet@mail.ru</li> 
+                        <li>г. Минск, ул. Колесникова 44, офис 3а</li> 
+                    </ul> 
+                </div>
+                 
+            </div>
+            <div id="additional_info"> 
+                <p>Минск 2024</p> 
+            </div>  
+        </div>
+
+        <p class="certificate-info"><strong>Нажмите на текст ниже, чтобы скачать сертификат</strong></p>
+        <a href="{% static 'images/sertificat.jpg' %}" download="sertificat.jpg" class="download-link">Скачать сертификат</a>
+    </div>
+{% endblock %}

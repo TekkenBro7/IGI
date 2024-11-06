@@ -1,0 +1,15 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>Добавление штрафа</h1>
+    <div class="login-form">
+        <form method="post">
+            {% csrf_token %}
+            
+            {{ form.as_p }}
+
+            <button class="form-control" type="submit">Добавить штраф</button>
+        </form>
+    </div>
+{% endblock %}

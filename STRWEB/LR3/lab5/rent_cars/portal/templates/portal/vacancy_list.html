@@ -1,0 +1,18 @@
+{% extends 'users/base.html' %} {% load static %} {% block title %}Вакансии{% endblock %} {% block content %}
+<h1>Список вакансий</h1>
+<div class="vacancies-container" id="vacancies-container">
+    <ul>
+        {% for vacancy in vacancies %}
+        <li class="vacancy">
+            <h2>{{ vacancy.title }}</h2>
+            <img src={% static 'images/vacancy.jpg' %}>
+            <p><strong>Описание:</strong> {{ vacancy.description }}</p>
+            <p><strong>Требования:</strong> {{ vacancy.requirements }}</p>
+            <p><strong>Оплата:</strong> {{ vacancy.payment }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<br><br><br>
+<script type="text/javascript" src={% static "js/data.js" %}></script>
+{% endblock %}

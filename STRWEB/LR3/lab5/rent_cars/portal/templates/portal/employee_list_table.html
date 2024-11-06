@@ -1,0 +1,91 @@
+{% extends 'users/base.html' %} {% load static %} {% block title %} Таблица сотрудников{% endblock %} {% block content %}
+<h1>Список сотрудников</h1>
+
+<div>
+    <input type="text" id="filter-input" placeholder="Введите текст для поиска">
+    <button class="filt_but" onclick="applyFilter()">Найти</button>
+</div>
+
+<button onclick="toggleAddEmployeeForm()">Добавить сотрудника</button>
+
+<div id="add-employee-form" style="display: none;">
+    <h3>Добавить сотрудника</h3>
+    <form id="employee-form" method="post" enctype="multipart/form-data">
+        {% csrf_token %} 
+        {{ form.user.label_tag }} 
+        {{form.user}} 
+        
+        {{ form.photo.label_tag }} 
+        {{form.photo}} 
+        
+        {{ form.job_description.label_tag }} 
+        {{form.job_description}} 
+        
+        {{ form.phone_number.label_tag }} 
+        {{ form.phone_number }}
+        <small id="phone-error" style="color: red; display: none;"></small><br> 
+        {{ form.email.label_tag }} 
+        {{ form.email }} 
+        <small id="email-error" style="color: red; display: none;"></small><br>
+        {{ form.url.label_tag }} 
+        {{ form.url }}
+        <small id="url-error" style="color: red; display: none;"></small><br>
+
+        <button type="button" id="subm_button" onclick="validateAndSubmit()" style="display:none">Добавить</button>
+    </form>
+</div>
+
+<table id="employee-table">
+    <thead>
+        <tr>
+            <th onclick="sortTable(0)">Имя <span class="sort-icon"></span></th>
+            <th>Фото</th>
+            <th onclick="sortTable(2)">Описание работы <span class="sort-icon"></span></th>
+            <th onclick="sortTable(3)">Телефон <span class="sort-icon"></span></th>
+            <th onclick="sortTable(4)">Email <span class="sort-icon"></span></th>
+            <th>Выбрать</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for employee in employees %}
+        <tr onclick="showDetails(this)">
+            <td>{{ employee.user.username }}</td>
+            <td><img src="{{ employee.photo.url }}" alt="Фото" width="50"></td>
+            <td>{{ employee.job_description }}</td>
+            <td>{{ employee.phone_number }}</td>
+            <td>{{ employee.email }}</td>
+            <td>
+                <label class="switch2">
+                    <input type="checkbox" id="switchSettings" class="employee-checkbox" data-name="{{ employee.user.username }}">
+                    <span class="sliderSwitch2"></span>
+                </label>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div id="pagination-controls"></div>
+
+<button class="generateBonusBtn" onclick="generateBonusText()">Премировать</button>
+
+<div id="bonus-text" style="display:none;"></div>
+
+<div id="details-block" style="margin-top: 20px; padding: 10px; border: 1px solid #ddd; display:none">
+    <h2>Детали сотрудника</h2>
+    <p><strong>Имя:</strong> <span id="detail-name"></span></p>
+    <p><strong>Фото:</strong> <span id="detail-photo"></span></p>
+    <p><strong>Описание работы:</strong> <span id="detail-job"></span></p>
+    <p><strong>Телефон:</strong> <span id="detail-phone"></span></p>
+    <p><strong>Email:</strong> <span id="detail-email"></span></p>
+</div>
+
+<div class="container-loader">
+    <div class="loader">
+        <div class="line line-1"></div>
+        <div class="line line-2"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src={% static "js/employee_table.js" %}></script>
+{% endblock %}

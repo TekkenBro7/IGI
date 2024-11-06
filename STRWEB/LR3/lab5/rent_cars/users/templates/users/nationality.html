@@ -1,0 +1,31 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block title %} Шутка {% endblock %}
+
+{% block content %}    
+    <form action="{% url 'nationalize' %}" class="nationality-form" method="GET">
+        <label for="name">Введите имя:</label>
+        <input type="text" id="name" name="name">
+        <button type="submit">Проверить</button>
+    </form>
+    <div class="results-container">
+        <div class="results-content">
+            {% if name %}
+                <h2>Результаты для имени {{ name }}:</h2>
+                {% if data.count > 0 %}
+                    <p>Вероятность национальности:</p>
+                    <ul class="results-list">
+                        {% for country in data.country %}
+                            <li>{{ country.country_id }}: {{ country.probability }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>Для данного имени нет данных о национальностях.</p>
+                {% endif %}
+            {% else %}
+                <p>Ничего не введено</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

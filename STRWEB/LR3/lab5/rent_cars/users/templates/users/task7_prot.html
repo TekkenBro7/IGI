@@ -1,0 +1,38 @@
+{% extends 'users/base.html' %} {% load static %} {% block title %} Главная {% endblock %} {% block content %}
+
+<h2>Добавить нового человека</h2>
+<form id="personForm">
+    <input type="text" id="personLastName" placeholder="Фамилия" required>
+    <input type="text" id="personFirstName" placeholder="Имя" required>
+    <input type="text" id="personMiddleName" placeholder="Отчество" required>
+    <input type="number" id="personAge" min="1" max="120" placeholder="Возраст" required>
+    <button type="submit">Добавить</button>
+</form>
+
+<h2>Список людей</h2>
+<div id="personList"></div>
+
+<h2>Добавить нового сотрудника</h2>
+<form id="employeeForm">
+    <input type="text" id="lastName" placeholder="Фамилия" required>
+    <input type="text" id="firstName" placeholder="Имя" required>
+    <input type="text" id="middleName" placeholder="Отчество" required>
+    <input type="number" id="age" min="1" max="120" placeholder="Возраст" required>
+    <input type="number" id="experience" min="0" max="100" placeholder="Стаж" required>
+    <button type="submit">Добавить</button>
+</form>
+
+<h2>Список сотрудников</h2>
+<div id="employeeList"></div>
+
+<h2>Молодые сотрудники с опытом более 3 лет</h2>
+<div class="emp-count">
+    <label for="employeeCount">Количество сотрудников для отображения:</label>
+    <input type="number" id="employeeCount" min="1" placeholder="Введите количество">
+    <button onclick="Employee.displayYoungExperiencedEmployees()">Показать</button>
+</div>
+<div id="youngEmployees"></div>
+
+<script type="text/javascript" src={% static "js/task7_funcStyle.js" %}></script>
+
+{% endblock %}

@@ -1,0 +1,200 @@
+{% extends 'users/base.html' %} {% load static %} {% block title %} Политика конфиденциальности {% endblock %} {% block content %}
+<div id="privacy_policy">
+    <h1>Добро пожаловать на наш сайт!</h1>
+    <p class="introduction">Здесь вы можете найти информацию о нашем сервисе проката автомобилей.</p>
+
+    <section id="top">
+        <img src="https://img.freepik.com/premium-vector/road-top-view-cartoon-asphalt-street-way_543062-3276.jpg?semt=ais_hybrid" id="bg" />
+        <h2 id="text1_scroll">Качественный сервис</h2>
+        <h2 id="text2_scroll">Эксклюзивные машины</h2>
+        <img src="{% static 'images/car1.png' %}" id="car1" />
+        <img src="{% static 'images/car2.png' %}" id="car2" />
+        <img src="{% static 'images/car3.png' %}" id="car3" />
+        <img src="{% static 'images/car4.png' %}" id="car4" />
+    </section>
+
+    <p class="checkText">Показать настройки стиля
+    </p>
+    <label>
+        <input type="checkbox" id="switchSettings">
+    </label>
+
+    <div id="styleSettings" style="display: none;">
+        <label for="fontSize">Размер шрифта:</label>
+        <input type="range" id="fontSize" min="12" max="48">
+        <br>
+        <label for="textColor">Цвет текста:</label>
+        <input type="color" id="textColor">
+        <br>
+        <label for="bgColor">Цвет заднего фона:</label>
+        <input type="color" id="bgColor">
+        <br>
+        <button id="resetButton">Отмена</button>
+    </div>
+
+
+
+
+    <div id="exm_nav">
+        <h1>Заголовок сайта</h1>
+        <div class="exm">
+            <ul>
+                <li><a href="#">Главная</a></li>
+                <li><a href="#">О нас</a></li>
+                <li><a href="#">Услуги</a></li>
+                <li><a href="#">Контакты</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <h1>Специальные формы лигатур</h1>
+    <p>Текст с использованием общих лигатур:<br><span class="fontL">"This firm was founded in 1926"</span>.</p>
+    <p>Текст без использования общих лигатур:<br><span>"This firm was founded in 1926"</span>.</p>
+
+    <ul class="custom-bullets">
+        <li>First item</li>
+        <li>Second item</li>
+        <li>Third item</li>
+    </ul>
+
+    <p class="selectable-text">Выделите этот текст, чтобы увидеть изменение стиля.</p>
+
+    <q>
+      Ваша работа заполнит большую часть жизни и единственный способ быть
+      полностью довольным — делать то, что по-вашему является великим делом.
+      И единственный способ делать великие дела — любить то, что вы делаете.
+</q>
+
+    <blockquote class="quote" lang="en">
+        This is an English quote.
+    </blockquote>
+
+    <blockquote class="quote" lang="fr">
+        Voici une citation en français.
+    </blockquote>
+
+    <blockquote class="quote" lang="ru">
+        Это русская цитата.
+    </blockquote>
+
+    <h1> h1 Text </h1>
+
+    <h1 class="h1-variant"> h1 variant </h1>
+
+    <div class="multi-column">
+        <p>
+            Это пример текста, который разбит на несколько колонок. Используя свойство CSS <code>columns</code>, вы можете легко организовать текст в колонки, что улучшает читаемость и придаёт контенту более привлекательный вид. Вы можете настроить <code>column-count</code>            для указания количества колонок и <code>column-gap</code> для задания расстояния между ними.
+        </p>
+        <p>
+            Многоуровневое отображение текста особенно удобно для длинных статей, списков или описаний. Это также может помочь лучше структурировать информацию, делая её более доступной для восприятия.
+        </p>
+        <p>
+            Вы можете комбинировать это свойство с другими стилями, чтобы создать уникальный и привлекательный макет для вашего контента.
+        </p>
+    </div>
+
+    <div class="card featured">
+        Это карточка с классами `card` и `featured`.
+    </div>
+    <div class="card">
+        Это карточка только с классом `card`.
+    </div>
+
+    <br>
+
+
+
+    <div class="container-example">
+        <div>
+            <p>Этот абзац вложен глубже и не будет затронут.</p>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="container2-example">
+        <p>Этот абзац сразу после заголовка.</p>
+    </div>
+
+    <br>
+
+    <div class="container3-example">
+        <p>Этот абзац сразу после заголовка.</p>
+        <p>Этот абзац идет дальше.</p>
+    </div>
+
+    <br>
+
+    <div class="container4-example">
+        <p>Этот элемент затронут универсальным селектором.</p>
+        <div>Этот элемент также будет затронут.</div>
+    </div>
+
+    <br>
+
+    <h3>Список</h3>
+    <ul>
+        <li>Первый элемент</li>
+        <li>Второй элемент</li>
+        <li>Третий элемент</li>
+        <li>Четвертый элемент</li>
+        <li>Пятый элемент</li>
+    </ul>
+
+    <br>
+
+    <table class="table-example">
+        <thead>
+            <tr>
+                <th>Заголовок</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Первая строка</td>
+            </tr>
+            <tr>
+                <td>Вторая строка</td>
+            </tr>
+            <tr>
+                <td>Третья строка</td>
+            </tr>
+            <tr>
+                <td>Последняя строка</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+
+    <form class="my-form">
+        <label for="required">Обязательное поле:</label>
+        <input type="text" id="required" required><br><br>
+
+        <label for="optional">Необязательное поле:</label>
+        <input type="text" id="optional" optional><br><br>
+
+        <label for="disabled">Заблокированное поле:</label>
+        <input type="text" id="disabled" disabled><br><br>
+
+        <label for="range">Введите число от 1 до 10:</label>
+        <input type="number" id="range" min="1" max="10" required><br><br>
+
+        <label>
+        <input type="checkbox" checked> Включенный флажок
+    </label><br>
+
+        <label>
+        <input type="radio" name="radio" checked> Включенный переключатель
+    </label>
+
+        <button type="submit">Применить</button>
+
+    </form>
+</div>
+
+<script type="text/javascript" src={% static "js/changeStyles.js" %}></script>
+<script type="text/javascript" src={% static "js/scroll.js" %}></script>
+
+
+{% endblock %}
